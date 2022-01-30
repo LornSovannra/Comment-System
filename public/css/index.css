@@ -472,6 +472,15 @@ section{
     color: red;
 }
 
+.edit_delete button{
+    font-size: 12px;
+}
+
+.edit_delete p:hover,
+.edit_delete button:hover{
+    text-decoration: underline 1px solid gray;
+}
+
 @media screen and (max-width: 992px)
 {
     .search-wrapper{

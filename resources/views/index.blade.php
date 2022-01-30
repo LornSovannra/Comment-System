@@ -81,7 +81,7 @@
                                 <div class="card-top-left">
                                     <img src="img/{{ $post -> user_post_profile_image }}" alt="">
                                     <div>
-                                        <p style="margin: -2px 0 0 0;">{{ $post -> user_post_name }}</p>
+                                        <p style="margin: -2px 0 0 0; font-weight: bold;">{{ $post -> user_post_name }}</p>
                                         <p style="color: gray; font-size: 10px; margin: 4px 0 0 0;">{{ $post -> user_post_date}}</p>
                                     </div>
                                 </div>
@@ -130,18 +130,39 @@
                         </div>
 
                         @foreach ($comments as $comment)
-                            <div style="display: flex; margin: 15px 0 0 15px;">
-                                @if ($comment -> post_id == $post -> id)    
-                                    <img class="profile_image_img" src="img/IMG_6116.JPEG" alt="">
-                                    <div style="margin: 10px 0 0 0;">
-                                        <div style="display: flex; margin: 0 0 0 5px;">
-                                            <p style="margin: -2px 0 0 0;">{{ $comment -> user_comment_name }}</p>
-                                            <p style="color: gray; font-size: 10px; margin: 3px 0 0 10px;">{{ $comment -> user_comment_date}}</p>
+                            @if ($comment -> post_id == $post -> id)    
+                                <div style="display: flex; margin: 10px 0 10px 15px;">
+                                        <img class="profile_image_img" src="img/IMG_6116.JPEG" alt="">
+                                        <div style="background: whitesmoke; padding: 10px 10px 0 10px; border-radius: 15px;">
+                                            <div style="display: flex; margin: 0 0 0 5px;">
+                                                <p style="margin: -2px 0 0 0; font-weight: bold;">{{ $comment -> user_comment_name }}</p>
+                                                <p style="color: gray; font-size: 10px; margin: 3px 0 0 10px;">{{ $comment -> user_comment_date}}</p>
+                                            </div>
+                                            <div class="edit_delete_wrapper">
+                                                <p style="margin: 0 0 0 5px; padding: 10px 0 0 0;">{{ $comment -> user_comment_content }}</p>
+                                                <div style="display: flex; font-size: 12px; cursor: pointer; justify-content: flex-end;" class="edit_delete">
+                                                    <p style="padding: 0 8px 0 0;" id="edit_comment_button">Edit</p>
+                                                    <form action="{{ route("delete-comment", $comment -> id) }}" method="POST">
+                                                        @csrf
+                                                        <button type="submit" style="background: none; border: none; cursor: pointer; padding: 12.2px 0 0 0;">Delete</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                            <div class="cancel_save_wrapper" style="display: none;">
+                                                <form action="{{ route("update-comment", $comment -> id) }}" method="POST">
+                                                    @csrf
+                                                    <textarea style="margin: 10px 0 0 5px; width: 300px; height: 50px" type="text" name="user_comment_content">
+                                                        {{ $comment -> user_comment_content }}
+                                                    </textarea>
+                                                    <div style="display: flex; font-size: 12px; cursor: pointer; justify-content: flex-end;" class="edit_delete">
+                                                        <p style="padding: 0 8px 0 0;" id="cancel_save_button">Cancel</p>
+                                                        <button type="submit" id="save_comment_btn" style="background: none; border: none; cursor: pointer;">Save</button>
+                                                    </div>
+                                                </form>
+                                            </div>
                                         </div>
-                                        <p style="margin: 0 0 10px 5px; padding: 10px 0 0 0;">{{ $comment -> user_comment_content }}</p>
-                                    </div>
-                                @endif
-                            </div>
+                                </div>
+                             @endif
                         @endforeach
                     </div>
                     <!-- End Content -->
@@ -192,7 +213,7 @@
     <div class="post-details-wrapper">
         <div class="post-details">
             <div><p>Delete</p></div>
-            <div><p>Unfollow</p></div>
+            <div><p>Edit</p></div>
             <div><p>Go to post</p></div>
             <div><p>Share to...</p></div>
             <div><p>Copy Link</p></div>

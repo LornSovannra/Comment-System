@@ -54,12 +54,23 @@ const like_dislike = document.querySelector('.like_dislike');
 
 like_dislike.addEventListener('toggle', () => {
     like_dislike.style.color = "red";
-    /* if(like_dislike.style.color = "black")
-    {
-        like_dislike.style.color = "red"
-    } */
-    /* else if(like_dislike.style.color = 'red')
-    {
-        like_dislike.style.color = "black"
-    } */
 });
+
+let edit_comment_btn = document.querySelectorAll("#edit_comment_button")
+let cancel_save_button = document.querySelectorAll("#cancel_save_button")
+let cancel_save_wrapper = document.querySelectorAll(".cancel_save_wrapper")
+let edit_delete_wrapper = document.querySelectorAll(".edit_delete_wrapper")
+
+edit_comment_btn.forEach(button => {
+    button.addEventListener("click", () => {
+        edit_delete_wrapper.forEach(change => change.style.display = "none")
+        cancel_save_wrapper.forEach(change => change.style.display = "flex")
+    })
+})
+
+cancel_save_button.forEach(button => {
+    button.addEventListener("click", () => {
+        cancel_save_wrapper.forEach(change => change.style.display = "none")
+        edit_delete_wrapper.forEach(change => { change.style.display = "flex"; change.style.flexDirection = "column"})
+    })
+})

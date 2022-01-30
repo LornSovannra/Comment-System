@@ -19,4 +19,19 @@ class CommentController extends Controller
 
         return redirect("/");
     }
+
+    public function Update(CommentFormRequest $request, $id){
+        $comment = Comment::findOrFail($id);
+        $comment -> user_comment_content = $request -> user_comment_content;
+        $comment -> save();
+
+        return redirect("/");
+    }
+
+    public function Delete($id){
+        $comment = Comment::findOrFail($id);
+        $comment -> delete();
+
+        return redirect("/");
+    }
 }
