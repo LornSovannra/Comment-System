@@ -74,3 +74,9 @@ cancel_save_button.forEach(button => {
         edit_delete_wrapper.forEach(change => { change.style.display = "flex"; change.style.flexDirection = "column"})
     })
 })
+
+$('.show_confirm').click(function(e) {
+    if(!confirm('Are you sure you want to delete this?')) {
+        e.preventDefault();
+    }
+});
